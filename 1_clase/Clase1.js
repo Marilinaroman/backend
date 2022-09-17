@@ -7,27 +7,26 @@ class Usuario {
     }
 
     getFullName(){
-        console.log(`El nombre completo es: ${this.apellido} ${this.nombre}`)
+        return `El nombre completo es: ${this.apellido} ${this.nombre}`
     }
 
     addMascotas(nombreMascota,tipoMascota){
         const miMascota = {nombreMascota, tipoMascota}
         this.mascotas.push(miMascota)
-        console.log(this.mascotas)
     }
 
     countMascotas(){
-        const count = this.mascotas.filter(u => u.nombreMascota).length
-        console.log(`El usuario tiene ${count} mascotas`)
+        const count = this.mascotas.length
+        return `El usuario tiene ${count} mascotas`
     }
     addBook(nombre, autor){
         const libro = {nombre, autor}
         this.libros.push(libro)
-        console.log(this.libros)
+        return this.libros
     }
     getBookName(){
         const nombresLibros = this.libros.map((e)=> e.nombre)
-        console.log(nombresLibros)
+        return nombresLibros
     }
 }
 
@@ -35,8 +34,8 @@ const nuevoUsuario = new Usuario('Marilina','Roman',[{nombre:'Harry Potter',auto
 
 
 console.log(nuevoUsuario)
-nuevoUsuario.getFullName()
-nuevoUsuario.addMascotas('pepito','conejo')
-nuevoUsuario.countMascotas()
-nuevoUsuario.addBook('el señor de las moscas','william golding')
-nuevoUsuario.getBookName()
+console.log(nuevoUsuario.getFullName())
+nuevoUsuario.addMascotas('walter','conejo')
+console.log(nuevoUsuario.countMascotas())
+console.log(nuevoUsuario.addBook('el señor de las moscas','william golding'))
+console.log(nuevoUsuario.getBookName())
