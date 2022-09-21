@@ -44,11 +44,11 @@ class Contenedor {
     async save(obj){
         try{
             const data = await this.getAll()
-            const newId = data.length + 1
-            const newData = {...obj, id:newId}
+            const newId = data.at(-1)
+            const newData = {...obj, id:(newId["id"] + 1)}
             data.push(newData)
             this.reWriteData(data)
-            return newId
+            return newData["id"]
         } catch(err){
             console.log(err);
         }

@@ -34,5 +34,11 @@
     "precio": 20,
     "thumbnail": "url de la foto del producto",
     "id": 6
+  },
+  {
+    "producto": "guantes",
+    "precio": 200,
+    "thumbnail": "url de la foto del producto",
+    "id": 7
   }
 ]
