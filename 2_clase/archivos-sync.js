@@ -9,11 +9,13 @@ class Contenedor {
     async getById(id){
         try {
             this.object = await this.getAll()
-            return this.object.filter((e)=> e.id === Number(id))
+            const obj = this.object.filter((e)=> e.id === Number(id))
+            return obj? obj : null
         } catch(err){
             console.log(err);
         }
     }
+
     async getAll(){
         try{
             const data = await this.readData(this.data)
@@ -22,6 +24,7 @@ class Contenedor {
             console.log(err);
         }
     }
+
     async deleteById(id){
         try{
             const data = await this.getAll()
@@ -58,7 +61,6 @@ class Contenedor {
     readData(path){
         const obj = JSON.parse(fs.readFileSync(path,'utf-8'))
         return obj
-
     }
     reWriteData(object){
         fs.writeFileSync(this.data,JSON.stringify(object,null,2))
