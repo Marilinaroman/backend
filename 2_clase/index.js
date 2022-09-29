@@ -1,4 +1,4 @@
-const Contenedor = require('./archivos-sync.js');
+const Contenedor = require('./Contenedor.js');
 
 const productos = new Contenedor('./archivo.txt');
 

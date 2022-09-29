@@ -1,4 +1,4 @@
-const Contenedor = require('../2_clase/archivos-sync');
+const Contenedor = require('../2_clase/Contenedor');
 const express = require('express')
 
 //Crea servidor
@@ -17,7 +17,8 @@ app.get('/productos', async (request,response)=>{
 })
 app.get('/productosRandom', async (request,response)=>{
     const data = productos.getAll()
-    let numero = Math.round(Math.random(1,data.length)*10)
+    let numero = Math.round(Math.random(1,data.length)*10+1)
+    console.log(numero)
     const idRandom = await productos.getById(numero)
     response.send(idRandom)
 })
