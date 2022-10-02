@@ -1,0 +1,50 @@
+[
+  {
+    "producto": "remera",
+    "precio": 1000,
+    "thumbnail": "url de la foto del producto",
+    "id": 1
+  },
+  {
+    "producto": "pantalon",
+    "precio": 1000,
+    "thumbnail": "url de la foto del producto",
+    "id": 2
+  },
+  {
+    "producto": "camisa",
+    "precio": 1000,
+    "thumbnail": "url de la foto del producto",
+    "id": 3
+  },
+  {
+    "producto": "campera",
+    "precio": 1000,
+    "thumbnail": "url de la foto del producto",
+    "id": 4
+  },
+  {
+    "producto": "bufanda",
+    "precio": 2000,
+    "thumbnail": "url de la foto del producto",
+    "id": 5
+  },
+  {
+    "producto": "medias",
+    "precio": 20,
+    "thumbnail": "url de la foto del producto",
+    "id": 6
+  },
+  {
+    "producto": "guantes",
+    "precio": 200,
+    "thumbnail": "url de la foto del producto",
+    "id": 7
+  },
+  {
+    "producto": "camiseta",
+    "precio": 500,
+    "thumbnail": "url de la foto del producto",
+    "id": 8
+  }
+]
