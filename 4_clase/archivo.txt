@@ -40,11 +40,5 @@
     "precio": 200,
     "thumbnail": "url de la foto del producto",
     "id": 7
-  },
-  {
-    "producto": "camiseta",
-    "precio": 500,
-    "thumbnail": "url de la foto del producto",
-    "id": 8
   }
 ]
