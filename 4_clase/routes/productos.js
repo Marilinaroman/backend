@@ -32,7 +32,7 @@ router.post('/',async (req,  res) =>{
 router.put('/:id', async (req,res) =>{
     const {id} = req.params
     const modificacion = req.body
-    const data = await productos.getAll()
+    /*const data = await productos.getAll()
     const prod = await data.findIndex(e => e.id === parseInt(id)); 
     
     if(prod >= 0){
@@ -40,7 +40,10 @@ router.put('/:id', async (req,res) =>{
         return res.status(200).send(data)
     } else{
         return res.status(404).send('El producto no existe')
-    }
+    }*/
+    const prod = await productos.putById(Number(id),modificacion)
+    res.send(prod)
+
 })
 
 //elimina el elemento

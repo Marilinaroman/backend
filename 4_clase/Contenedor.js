@@ -57,6 +57,21 @@ class Contenedor {
         }
 
     }
+
+    async putById(id, body){
+        try {
+            const data = await this.getAll();
+            const prod = data.findIndex(elm=>elm.id === id);
+            data[prod] = {
+                id:id,
+                ...body
+            };
+            await fs.promises.writeFile(this.data, JSON.stringify(data, null, 2))
+            return data;
+        } catch (error) {
+            console.log(error)
+        }
+    }
     
     readData(path){
         const obj = JSON.parse(fs.readFileSync(path,'utf-8'))

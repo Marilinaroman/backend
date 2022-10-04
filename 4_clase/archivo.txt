@@ -1,9 +1,9 @@
 [
   {
+    "id": 1,
     "producto": "remera",
-    "precio": 1000,
-    "thumbnail": "url de la foto del producto",
-    "id": 1
+    "precio": 1500,
+    "thumbnail": "url de la foto del producto"
   },
   {
     "producto": "pantalon",
