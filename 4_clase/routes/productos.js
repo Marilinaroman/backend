@@ -17,8 +17,15 @@ router.get('/', async (req, res) =>{
 //muestra el producto segun su id
 router.get('/:id', async (req,res)=>{
     const {id} =req.params
-    const prod = await productos.getById(id)
-    res.send(prod)
+    const prod = await productos.getById(Number(id))
+
+    if(prod){
+        res.send(prod)
+    }else{
+        return res.json({
+            message:"el producto no existe"
+        })
+    }
 })
 
 //guarda un elemento
@@ -32,15 +39,7 @@ router.post('/',async (req,  res) =>{
 router.put('/:id', async (req,res) =>{
     const {id} = req.params
     const modificacion = req.body
-    /*const data = await productos.getAll()
-    const prod = await data.findIndex(e => e.id === parseInt(id)); 
     
-    if(prod >= 0){
-        data[prod] = modificacion
-        return res.status(200).send(data)
-    } else{
-        return res.status(404).send('El producto no existe')
-    }*/
     const prod = await productos.putById(Number(id),modificacion)
     res.send(prod)
 
