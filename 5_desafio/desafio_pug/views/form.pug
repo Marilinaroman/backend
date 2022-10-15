@@ -1,0 +1,13 @@
+include ./index.pug
+
+form(action="/productos" method='post')
+    label Producto
+    input(type="text" name='producto')
+    label Precio
+    input(type="number" name='precio')
+    label URL
+    input(type="text" name='url')
+    button(class="btn btn-primary") Enviar
+
+a(href="/productos")
+    button(class="btn btn-primary") Ver productos

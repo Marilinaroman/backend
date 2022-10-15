@@ -1,0 +1,23 @@
+include ./index.pug
+
+#productos
+if productos!=0
+    table 
+        thead 
+            tr
+                th Nombre
+                th Precio
+                th URL 
+        tbody 
+        tbody 
+            each prod in productos
+                tr
+                    td !{prod.producto}
+                    td !{prod.precio}
+                    td 
+                        img(src=prod.url, alt=prod.producto)
+else 
+    h2 No hay productos
+
+a(href="/")
+    button(class="btn btn-primary") Volver
