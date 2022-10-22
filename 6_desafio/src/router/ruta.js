@@ -1,15 +1,20 @@
 const express = require('express')
 const router = express.Router()
 
-const Contenedor = require('../Contenedor.js')
-const productos = new Contenedor('./archivo.txt');
+const productos = []
+const mensajes = []
 
-router.get('/', async(req,res)=>{
-    const data = await productos.getAll()
-    res.render('form',{productos:data})
+router.get('/', (req,res)=>{
+    productos = 
+    res.render('form',{productos})
+})
+
+router.get('/chat', (req,res)=>{
+    res.render('chat',{mensajes})
 })
 
 module.exports = {
     router,
-    productos
+    productos,
+    mensajes
 }

@@ -1,13 +1,11 @@
-<form method="get">
-    <div class="form-group col">
+<form class="form-group col">
         <label>Producto</label>
         <input class="input" id="nombre" type="text" name="producto">
         <label>Precio</label>
         <input class="input" id="precio" type="number" name="precio">
         <label>URL</label>
         <input  class="input" id="url"  type="text" name="url">
-        <button type="submit" id="enviar" class="btn btn-primary" >Enviar</button>
-    </div>
+        <input type="submit" id="enviar" class="btn btn-primary" value="enviar">
 </form>
 
 {{#if productos}}
@@ -19,7 +17,7 @@
         <th>URL</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="detalleProducto">
         {{#each productos}}
             <tr>
                 <td>{{this.producto}}</td>
@@ -30,3 +28,5 @@
     </tbody>
 </table>
 {{/if}}
+
+<a class="btn btn-primary" href="/chat">Chat</a>

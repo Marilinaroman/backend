@@ -1,8 +1,8 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
 const {Server}= require('socket.io')
-const router = require('./router/ruta.js')
-const productos = require('./router/ruta.js')
+const {router, productos, mensajes} = require('./router/ruta.js')
+const fs = require('fs');
 
 const app = express()
 
@@ -35,14 +35,23 @@ app.use('/', router);
 
 
 io.on('connection',(socket)=>{
-    console.log('nuevo usuario', socket.id);
+    console.log('nuevo usuario', socket.id)
 
-    socket.broadcast.emit('newUser')
+    io.sockets.emit('productos', productos);
+	io.sockets.emit('chat', mensajes);
 
-    socket.on('nuevoProducto', data=>{
-        productos.save(data)
+    socket.broadcast.emit('nuevoUsuario')
 
-        //manda msj a todos los clientes
-        io.sockets.emit('historico', msjHistoricos)
+    socket.on('nuevoProducto', nuevoProducto=>{
+        productos.push(nuevoProducto)
+        fs.writeFileSync('./archivo.txt', JSON.stringify(productos))
+        io.sockets.emit('lista', productos)
+    })
+
+    socket.on('nuevoMsj', nuevoMsj =>{
+        console.log(nuevoMsj);
+        mensajes.push(nuevoMsj)
+        fs.writeFileSync('./mensajes.txt', JSON.stringify(mensajes))
+        io.sockets.emit('chat', mensajes)
     })
 })
