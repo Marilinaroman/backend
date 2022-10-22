@@ -5,7 +5,6 @@ const productos = []
 const mensajes = []
 
 router.get('/', (req,res)=>{
-    productos = 
     res.render('form',{productos})
 })
 

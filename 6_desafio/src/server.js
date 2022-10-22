@@ -1,10 +1,13 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
-const {Server}= require('socket.io')
+const { Server: HttpServer } = require("http");
+const { Server: Socket } = require("socket.io");
 const {router, productos, mensajes} = require('./router/ruta.js')
 const fs = require('fs');
 
 const app = express()
+const httpServer = new HttpServer(app);
+const io = new Socket(httpServer);
 
 // configuro archivos json
 app.use(express.json())
@@ -13,9 +16,8 @@ app.use(express.urlencoded({extended:true}))
 //configuro el puerto
 const PORT = process.env.PORT|| 8080
 
-const server = app.listen(PORT,()=>console.log(`server ${PORT}`))
+const server = httpServer.listen(PORT,()=>console.log(`server ${PORT}`))
 
-const io = new Server(server)
 
 app.use(express.static('views'))
 
@@ -31,7 +33,6 @@ app.set('view engine', 'handlebars')
 // defino rutas
 
 app.use('/', router);
-
 
 
 io.on('connection',(socket)=>{

@@ -22,7 +22,6 @@ if(enviar){
         
     })
 
-
     //recibe los productos
     socketCliente.on('lista', (data) =>{
         let prod=''
@@ -34,42 +33,43 @@ if(enviar){
             </tr>`
         });
         detalleProducto.innerHTML = prod
-
     })
+
 }
+
 
 // variables del chat
 const msj = document.getElementById('msj')
 const chatHistorico = document.getElementById('chatHistorico')
+const enviarMsj = document.getElementById('enviarMsj')
 let user 
 
-/*
+
 Swal.fire({
     title: 'Bienvenido/a',
-    text:'Ingrese su Nick',
-    input:'text',
+    text:'Ingrese su Email',
+    input:'email',
     allowOutsideClick: false,
 }).then(res=>{
     user=res.value
-})*/
+})
+
 
 if(msj){
-    msj.addEventListener('keydown',e=>{
-    if(e.key==='Enter'){
+    enviarMsj.addEventListener('click',e=>{
         socketCliente.emit('nuevoMsj',{
-            userName: user,
+            userEmail: user,
             message: msj.value,
             hora: new Date()
         })
         msj.value=''
-    }
-    
     })
+    
     //recibe los msj
     socketCliente.on('chat',(data)=>{
         let elemento = ''
         data.forEach(e => {
-            elemento += `<p><strong class='text-primary'>${e.hora}</strong> <strong class='text-success'>${e.userName}</strong>: ${e.message}`
+            elemento += `<p class='text-success'><strong class='text-primary'>${e.userEmail}</strong> <strong class='text-danger'>${e.hora}</strong>: ${e.message}</p>`
         });
         chatHistorico.innerHTML = elemento
     })
