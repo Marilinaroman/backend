@@ -10,4 +10,7 @@ database.schema.createTable('cars',table =>{
     table.string("name",20)
     table.integer("price")
 }).then(()=>console.log("tabla creada"))
-.catch(err=>console.log(err))
+.catch(err=>{console.log(err); throw err})
+.finally(()=>{
+    knex.destroy()
+})
