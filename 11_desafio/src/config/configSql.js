@@ -4,6 +4,7 @@ import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
 export const options = {
     mariaDb:{
         client:'mysql',
@@ -21,5 +22,8 @@ export const options = {
             
         },
         useNullAsDefault: true
+    },
+    fileSystem:{
+        pathMensajes: path.join(__dirname , "../db/mensajesArchivo.txt")
     }
 }

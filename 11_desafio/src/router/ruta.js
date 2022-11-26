@@ -2,12 +2,14 @@ import express from 'express'
 import { productosTest } from '../test/testFaker.js'
 import ContendorMariaDb from '../clases/mariaDb.model.js'
 import ContenedorSqlite from '../clases/sqlite.model.js'
+import  {contenedorMsj} from '../clases/contenedorMsj.js'
 import { options } from '../config/configSql.js'
 
 
 const router = express.Router()
 const productos = new ContendorMariaDb(options.mariaDb,'productos')
-const mensajes = new ContenedorSqlite(options.sqlite,'mensajes')
+//const mensajes = new ContenedorSqlite(options.sqlite,'mensajes')
+const mensajes = new contenedorMsj(options.fileSystem.pathMensajes)
 
 router.get('/', async(req,res)=>{
     res.render('form')
@@ -76,7 +78,7 @@ router.delete('/productos/:id', async(req,res)=>{
 // rutas del chat
 router.get('/chat', async(req,res)=>{
     const data = await mensajes.getAll()
-    res.send(data)
+    res.render('chat',{data})
 })
 
 router.post('/chat', async (req,res)=>{

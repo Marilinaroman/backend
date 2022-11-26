@@ -1,5 +1,7 @@
-import {faker} from "@faker-js/faker"
+import {faker} from "@faker-js/faker";
+
 const {commerce, datatype, image}= faker
+
 faker.locale = 'es'
 
 const productosTest = []
