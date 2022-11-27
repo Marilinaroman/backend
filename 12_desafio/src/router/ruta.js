@@ -1,10 +1,11 @@
-import express from 'express'
+import express, { application } from 'express'
 import { productosTest } from '../test/testFaker.js'
 import ContendorMariaDb from '../clases/mariaDb.model.js'
 import ContenedorSqlite from '../clases/sqlite.model.js'
 import  {contenedorMsj} from '../clases/contenedorMsj.js'
 import { options } from '../config/configSql.js'
-import session from 'express-session'
+import session, { Cookie } from 'express-session'
+import MongoStore from 'connect-mongo'
 
 const router = express.Router()
 const productos = new ContendorMariaDb(options.mariaDb,'productos')
@@ -94,6 +95,43 @@ router.get('/productos-test', async(req,res)=>{
     res.send(productosTest)
 })
 
-//Cookies
+//Rutas cookies
+router.get('/login',(req,res)=>{
+    
+    const {userName, password} = req.query
+    if(req.session.userName){
+        res.redirect('./perfil')
+    }else{
+        if(userName){
+            req.session.userName = userName
+            res.render('form',{userName})
+        }else{
+            res.render('login')
+        }
+    }
+    
+})
+
+const checkUser = (req,res,next)=>{
+    if(req.session.userName){
+        console.log(req.session.userName);
+        next()
+    }else{
+        res.redirect('./login')
+    }
+}
+
+
+router.get('/perfil',checkUser,(req,res)=>{
+    res.render('form',{userName:req.session.userName})
+})
+
+router.get('/logout',(req,res)=>{
+    req.session.destroy()
+    setTimeout(()=>{
+            res.redirect('./login')
+    },3000)
+})
+
 
 export default router

@@ -6,9 +6,10 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 import { contenedorMsj } from './clases/contenedorMsj.js';
 import { options } from './config/configSql.js';
-import { normalize, schema, denormalize } from "normalizr";
-import fs from "fs"
-import { readFile } from 'fs/promises'
+import { normalize, schema } from "normalizr";
+import session from 'express-session'
+import cookieParser from 'cookie-parser'
+import MongoStore from 'connect-mongo'
 
 const mensajes = new contenedorMsj(options.fileSystem.pathMensajes)
 
@@ -57,6 +58,20 @@ const normalizarMsj = async()=>{
 }
 normalizarMsj()
 
+//Cookies
+app.use(cookieParser())
+
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl:'mongodb+srv://marilinaroman:marilinaroman@backend.rvxfdqn.mongodb.net/sessions?retryWrites=true&w=majority'
+    }),
+    secret:"claveSecreta",
+    resave:false,
+    saveUninitialized:false,
+    cookie:{
+        maxAge:600000
+    }
+}))
 
 // defino rutas
 
