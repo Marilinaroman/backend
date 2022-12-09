@@ -38,7 +38,7 @@ if(enviar){
 }
 
 
-// variables del chat
+/*variables del chat
 const msj = document.getElementById('msj')
 const chatHistorico = document.getElementById('chatHistorico')
 const enviarMsj = document.getElementById('enviarMsj')
@@ -113,4 +113,4 @@ if(msj){
         });
         chatHistorico.innerHTML = elemento
     })
-}
+}*/

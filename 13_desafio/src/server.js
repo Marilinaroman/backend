@@ -9,12 +9,28 @@ import { options } from './config/configSql.js';
 import { normalize, schema } from "normalizr";
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
+import passport from 'passport'
+import { Strategy as LocalStrategy } from 'passport-local'
+import bcrypt from 'bcrypt'
+import mongoose from 'mongoose'
 import MongoStore from 'connect-mongo'
+import { UserModel } from './model/users.js';
 
 const mensajes = new contenedorMsj(options.fileSystem.pathMensajes)
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+//Conecto base de datis
+const mongoUrl = "mongodb+srv://marilinaroman:marilinaroman@backend.rvxfdqn.mongodb.net/autenticationDb?retryWrites=true&w=majority"
+
+mongoose.connect(mongoUrl, {
+    useNewUrlParser:true,
+    useUnifiedTopology:true
+}, (err)=>{
+    if(err) return console.log(`hubo un error: ${err}`);
+    console.log('conexion exitosa');
+})
 
 
 // configuro archivos json
@@ -72,6 +88,23 @@ app.use(session({
         maxAge:600000
     }
 }))
+
+// Configuro passport
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+//serializar
+passport.serializeUser((user,done)=>{
+    done(null, user.id)
+})
+
+passport.deserializeUser((id, done)=>{
+    UserModel.findById(id,(error, userFound)=>{
+        if(error) return done(error)
+        return done(null,userFound)
+    })
+})
 
 // defino rutas
 
