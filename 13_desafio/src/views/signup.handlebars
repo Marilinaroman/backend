@@ -1,12 +1,15 @@
 
 <h1>Crear usuario</h1>
-<form class="form-group col" method="POST" action="/api/signup">
+{{#if error}}
+        <p>{{error}}</p>
+{{/if}}
+<form action="/api/signup" class="form-group col" method="POST" >
         <label>Nombre</label>
-        <input class="input" id="nombre" type="text" name="nombre">
+        <input class="input"  type="text" name="name">
         <label>Usuario</label>
-        <input class="input" id="userName" type="text" name="userName">
+        <input class="input"  type="text" name="email">
         <label>Password</label>
-        <input class="input" id="password" type="password" name="pasword">
-        <input type="submit" id="Iniciar Sesion" class="btn btn-primary" value="enviar">
+        <input class="input"  type="password" name="password">
+        <input type="submit" class="btn btn-primary" value="enviar">
 </form>
-<a class="btn btn-primary" href="./login">iniciar Sesion</a>
+<a class="btn btn-primary" href="./inicio-sesion">iniciar Sesion</a>

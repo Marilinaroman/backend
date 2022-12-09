@@ -15,28 +15,7 @@ const productos = new ContendorMariaDb(options.mariaDb,'productos')
 //const mensajes = new ContenedorSqlite(options.sqlite,'mensajes')
 const mensajes = new contenedorMsj(options.fileSystem.pathMensajes)
 
-//passport
-passport.use('signupStrategy', new LocalStrategy({
-    passReqToCallback:true,
-    usernameField: 'userName'
-},
-    (req,username,password,done)=>{
-        UserModel.findOne({username}, (error,userFound)=>{
-            if (error) return done(error,null,{message:'hubo un error'})
-            if(userFound) return done(null,userFound,{message:'el usuario existe'}) 
-            const newUser = {
-                name:req.body.nombre,
-                username,
-                password
-            }
 
-            UserModel.create(newUser, (error,userCreated)=>{
-                if(error) return done(error,null, {message:'error al registrar'})
-                return done(null, userCreated,{message:'usuario creado'})
-            })
-        })
-    }
-))
 
 
 
@@ -125,55 +104,7 @@ router.get('/productos-test', async(req,res)=>{
     res.send(productosTest)
 })
 
-router.get('/registro', async(req,res)=>{
-    res.render('signup')
-})
 
-
-router.post('/signup',passport.authenticate('signupStrategy',{
-    failureRedirect:'/registro',
-    failureMessage:true
-}),(req,res)=>{
-    res.redirect('/perfil')
-})
-
-//Rutas cookies
-router.get('/login',(req,res)=>{
-    
-    const {userName, password} = req.query
-    if(req.session.userName){
-        res.redirect('./perfil')
-    }else{
-        if(userName){
-            req.session.userName = userName
-            res.render('form',{userName})
-        }else{
-            res.render('login')
-        }
-    }
-    
-})
-
-const checkUser = (req,res,next)=>{
-    if(req.session.userName){
-        console.log(req.session.userName);
-        next()
-    }else{
-        res.redirect('./login')
-    }
-}
-
-
-router.get('/perfil',checkUser,(req,res)=>{
-    res.render('form',{userName:req.session.userName})
-})
-
-router.get('/logout',(req,res)=>{
-    req.session.destroy()
-    setTimeout(()=>{
-            res.redirect('./login')
-    },3000)
-})
 
 
 export default router
