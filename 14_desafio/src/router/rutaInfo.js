@@ -4,13 +4,14 @@ import {fork} from 'child_process'
 const routerInfo = express.Router()
 
 routerInfo.get('/',(req,res)=>{
-    const version = `Version de Node JS : ${process.version}`
-    const nombrePlataforma = `Nombre de la plataforma: ${process.platform}`
-    const pathEjecucion = `Path de ejecución : ${process.execPath}`
-    const processId = `Proceso ID : ${process.pid}`
-    const memoria = `Memoria en uso: ${process.memoryUsage().rss}`
-    const directorio = `Directorio : ${process.cwd()}`
-    res.send({version,nombrePlataforma,pathEjecucion,processId, memoria,directorio})
+    
+    res.json({Version_de_Node_JS : process.version,
+    Nombre_de_la_plataforma: process.platform,
+    Path_de_ejecución : process.execPath,
+    Proceso_ID : process.pid,
+    Memoria_en_uso: process.memoryUsage().rss,
+    Directorio :process.cwd()
+})
 })
 
 routerInfo.get('/randoms',(req,res)=>{
