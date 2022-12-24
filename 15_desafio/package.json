@@ -1,20 +1,17 @@
 {
-  "name": "backend",
+  "name": "15_desafio",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js",
+    "node-cluster": "node src/server.js -m CLUSTER"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Marilinaroman/backend.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Marilinaroman/backend/issues"
-  },
-  "homepage": "https://github.com/Marilinaroman/backend#readme",
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
     "bcrypt": "^5.1.0",
@@ -25,7 +22,7 @@
     "express-handlebars": "^6.0.6",
     "express-session": "^1.17.3",
     "knex": "^2.3.0",
-    "moment": "^2.29.4",
+    "minimist": "^1.2.7",
     "mongoose": "^6.8.1",
     "mysql": "^2.18.1",
     "normalizr": "^3.6.2",
@@ -33,10 +30,5 @@
     "passport-local": "^1.0.0",
     "socket.io": "^4.5.4",
     "sqlite3": "^5.1.4"
-  },
-  "devDependencies": {
-    "jest": "^29.0.3"
-  },
-  "keywords": [],
-  "description": ""
+  }
 }
