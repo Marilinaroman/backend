@@ -9,6 +9,7 @@ import { Strategy as LocalStrategy } from 'passport-local'
 import bcrypt from 'bcrypt'
 import session, { Cookie } from 'express-session'
 import { UserModel } from '../model/users.js'
+import { logger, logArchivoError } from '../logger.js'
 
 const router = express.Router()
 const productos = new ContendorMariaDb(options.mariaDb,'productos')
@@ -97,6 +98,10 @@ router.post('/chat', async (req,res)=>{
 
 router.get('/productos-test', async(req,res)=>{
     res.send(productosTest)
+})
+
+router.get('/*', async(req,res)=>{
+    logArchivoError.error('ruta inexistente')
 })
 
 
