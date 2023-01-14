@@ -21,6 +21,7 @@ import parseArgs from 'minimist';
 import cluster from 'cluster'
 import os from 'os'
 import {logger} from './logger.js'
+import { logArchivoError } from './logger.js';
 
 //Captura argumentos
 const optionsFork ={alias:{m:'mode'}, default:{mode:'FORK'}}
@@ -160,7 +161,7 @@ passport.use('loginStrategy', new LocalStrategy(
     (username, password, done) => {
         logger.info(username);
         UserModel.findOne({ username: username }, (err, user)=> {
-           logger.info(user);
+        logger.info(user);
             if (err) return done(err);
             if (!user) return done(null, false);
             if (!user.password) return done(null, false);
@@ -220,6 +221,10 @@ app.get('/api/logout',(req,res)=>{
 
 app.use('/api', router);
 app.use('/api/info', routerInfo);
+
+app.get('/*', async(req,res)=>{
+    logArchivoError.error('ruta inexistente')
+})
 
 
 

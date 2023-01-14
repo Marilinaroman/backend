@@ -19,5 +19,6 @@ log4js.configure({
 
 const logger = log4js.getLogger()
 const logArchivoError = log4js.getLogger('error')
+const logArchivoWarn = log4js.getLogger('warn')
 
-export {logger,logArchivoError}
+export {logger,logArchivoError, logArchivoWarn}

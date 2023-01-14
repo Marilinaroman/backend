@@ -100,9 +100,7 @@ router.get('/productos-test', async(req,res)=>{
     res.send(productosTest)
 })
 
-router.get('/*', async(req,res)=>{
-    logArchivoError.error('ruta inexistente')
-})
+
 
 
 
