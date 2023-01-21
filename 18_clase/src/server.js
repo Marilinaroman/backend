@@ -22,6 +22,8 @@ import cluster from 'cluster'
 import os from 'os'
 import {logger} from './logger.js'
 import { logArchivoError } from './logger.js';
+import {createTransport} from 'nodemailer'
+import twilio from 'twilio'
 
 //Captura argumentos
 const optionsFork ={alias:{m:'mode'}, default:{mode:'FORK'}}
@@ -44,6 +46,44 @@ mongoose.connect(mongoUrl, {
     if(err) return logger.error(`hubo un error: ${err}`);
     logger.info('conexion a base de datos exitosa');
 })
+
+//configuracion mails
+
+const TEST_EMAIL= 'maruflorroman@gmail.com'
+const TEST_PASSWORD = 'xkjoxrefgrntcmqn'
+
+// SMS configuracion
+const accountIdTwilio = 'AC00665e6f2286d1d32509c6801acaa6dd'
+const authTwilio = '0960e170e44d2015aa38f9aa3ef21a96'
+
+const clientTwilio = twilio(accountIdTwilio, authTwilio)
+
+const transporter = createTransport({
+    service: 'gmail',
+    port: 587,
+    auth: {
+        user: TEST_EMAIL,
+        pass: TEST_PASSWORD
+    },
+    secure: false,
+    tls:{
+        rejectUnauthorized: false
+    }
+});
+
+const emailTemplate = `<div>
+    <h1>Bienvenido!!</h1>
+    <img src="https://fs-prod-cdn.nintendo-europe.com/media/images/10_share_images/portals_3/2x1_SuperMarioHub.jpg" style="width:250px"/>
+    <p>Ya puedes empezar a usar nuestros servicios</p>
+    <a href="https://www.google.com/">Explorar</a>
+</div>`
+
+const mailOptions={
+    from:"Servidor de NodeJs",
+    to:TEST_EMAIL,
+    subject:"Correo de prueba desde un servidor de node",
+    html:emailTemplate
+}
 
 
 // configuro archivos json
@@ -217,6 +257,43 @@ app.get('/api/logout',(req,res)=>{
     },3000)
 })
 
+
+app.post('/twilio-sms', async(req,res)=>{
+    try{
+        clientTwilio.messages.create({
+            body:'Hola!',
+            from: '+13149476568',
+            to: '+541136457467'
+        })
+        res.send(`mensaje enviado ${res}`)
+
+    }catch(err){
+        res.send(err)
+    }
+})
+
+app.post('/twilio-wsp', async(req,res)=>{
+    try{
+        clientTwilio.messages.create({
+            body:'Hola!',
+            from: 'whatsapp:+14155238886',
+            to: 'whatsapp:+5491136457467'
+        })
+        res.send(`mensaje enviado ${res}`)
+
+    }catch(err){
+        res.send(err)
+    }
+})
+
+app.post('/envio-email-ethereal', async(req,res)=>{
+    try{
+        const response = await transporter.sendMail(mailOptions)
+        res.send(`mensaje enviado ${res}`)
+    }catch(err){
+        res.send(err)
+    }
+})
 // defino rutas
 
 app.use('/api', router);
