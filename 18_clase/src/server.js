@@ -49,13 +49,6 @@ mongoose.connect(mongoUrl, {
 
 //configuracion mails
 
-const TEST_EMAIL= 'maruflorroman@gmail.com'
-const TEST_PASSWORD = 'xkjoxrefgrntcmqn'
-
-// SMS configuracion
-const accountIdTwilio = 'AC00665e6f2286d1d32509c6801acaa6dd'
-const authTwilio = '0960e170e44d2015aa38f9aa3ef21a96'
-
 const clientTwilio = twilio(accountIdTwilio, authTwilio)
 
 const transporter = createTransport({
