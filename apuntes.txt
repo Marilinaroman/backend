@@ -1,2 +1,2 @@
 npm init -y
-npm i express
+npm i @faker-js/faker bcrypt compression connect-mongo cookie-parser dotenv express express-handlebars express-session knex log4js minimist mongoose mysql normalizr passport passport-local socket.io sqlite3
