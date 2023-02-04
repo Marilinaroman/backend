@@ -1,21 +1,13 @@
-import express, { application } from 'express'
-import { productosTest } from '../test/testFaker.js'
-import ContendorMariaDb from '../clases/mariaDb.model.js'
-import ContenedorSqlite from '../clases/sqlite.model.js'
-import  {contenedorMsj} from '../clases/contenedorMsj.js'
-import { options } from '../config/configSql.js'
-import passport from 'passport'
-import { Strategy as LocalStrategy } from 'passport-local'
-import bcrypt from 'bcrypt'
-import session, { Cookie } from 'express-session'
-import { UserModel } from '../model/users.js'
-import { logger, logArchivoError } from '../logger.js'
+import express from 'express'
+import {ContendorMariaDb} from '../../dbOperations/managers/mariaDb.managers.js'
+import  {contenedorMsj} from '../../dbOperations/managers/contenedorMsj.js'
+import { options } from '../../config/options.js'
 
 const router = express.Router()
 const productos = new ContendorMariaDb(options.mariaDb,'productos')
-//const mensajes = new ContenedorSqlite(options.sqlite,'mensajes')
 const mensajes = new contenedorMsj(options.fileSystem.pathMensajes)
 
+//http://localhost:8080/api/productos
 
 router.get('/', async(req,res)=>{
     res.render('form')
@@ -81,28 +73,5 @@ router.delete('/productos/:id', async(req,res)=>{
     
 })
 
-// rutas del chat
-router.get('/chat', async(req,res)=>{
-    const data = await mensajes.getAll()
-    res.render('chat',{data})
-})
 
-router.post('/chat', async (req,res)=>{
-    const newMsj = (req.body)
-    const msj = await mensajes.save(newMsj)
-    res.send(msj)
-
-})
-
-//ruta de testeo con faker
-
-router.get('/productos-test', async(req,res)=>{
-    res.send(productosTest)
-})
-
-
-
-
-
-
-export default router
+export {router as ProductosRouter}

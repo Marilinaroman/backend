@@ -77,5 +77,5 @@ class ContendorMariaDb{
     }
 }
 
-export default ContendorMariaDb
+export {ContendorMariaDb}
 

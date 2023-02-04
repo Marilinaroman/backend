@@ -1,6 +1,6 @@
 console.log('conectado');
 
-const socketCliente = io();
+//const socketCliente = io();
 
 //variables de productos
 const nombre = document.getElementById('nombre')
@@ -10,7 +10,7 @@ const url = document.getElementById('url')
 const enviar = document.getElementById('enviar')
 const detalleProducto = document.getElementById('detalleProducto')
 
-// Envia datos de productos
+/* Envia datos de productos
 if(enviar){
     enviar.addEventListener('click',()=>{
         socketCliente.emit('nuevoProducto',{
@@ -37,8 +37,7 @@ if(enviar){
 
 }
 
-
-/*variables del chat
+variables del chat
 const msj = document.getElementById('msj')
 const chatHistorico = document.getElementById('chatHistorico')
 const enviarMsj = document.getElementById('enviarMsj')
