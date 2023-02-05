@@ -1,9 +1,11 @@
 import express from 'express'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
-import { UserModel } from '../../dbOperations/model/users.js';
+import { UserManager } from '../../dbOperations/index.js'
+import { findUser } from '../../service/user.service.js'
+import * as UserController from '../../controllers/user.controllers.js'
 import bcrypt from 'bcrypt'
-import {logger} from '../../logs/logger.js'
+import {logger} from '../../config/logger.js'
 
 const router = express.Router()
 

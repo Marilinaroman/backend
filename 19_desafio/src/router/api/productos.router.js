@@ -1,77 +1,18 @@
 import express from 'express'
-import {ContendorMariaDb} from '../../dbOperations/managers/mariaDb.managers.js'
-import  {contenedorMsj} from '../../dbOperations/managers/contenedorMsj.js'
-import { options } from '../../config/options.js'
-
+import * as ProductosControllers from '../../controllers/productos.controllers.js'
 const router = express.Router()
-const productos = new ContendorMariaDb(options.mariaDb,'productos')
-const mensajes = new contenedorMsj(options.fileSystem.pathMensajes)
 
 //http://localhost:8080/api/productos
 
-router.get('/', async(req,res)=>{
-    res.render('form')
-})
+router.get('/', ProductosControllers.getProdsControllers)
 
-router.get('/productos', async (req,res)=>{
-    const data = await productos.getAll()
-    console.log(data);
-    res.send(data)
-})
+router.get('/:id', ProductosControllers.getProdByIdControllers)
 
-router.get('/productos/:id', async (req,res)=>{
-    const {id} = req.params
-    const producto = await productos.getById(id)
+router.post('/', ProductosControllers.saveProdController)
 
-    if(producto){
-        res.send(producto)
-    }else{
-        return res.json({
-            message:"el producto no existe"
-        })
-    }
-})
+router.put('/:id', ProductosControllers.updateProdController)
 
-router.post('/productos', async (req,res)=>{
-    
-    const newProd = (req.body)
-    await productos.save(newProd)
-    const data = await productos.getAll()
-    
-    res.send(data)
-
-})
-
-router.put('/productos/:id', async(req,res) =>{
-    const {id} = req.params
-    const modificacion = req.body
-    
-    const existe = await productos.getById(id)
-        
-        if (!existe){
-            return res.status(404).send({ message: 'Error el producto no existe' })
-        } else{
-            const prod = await productos.putById(id,modificacion)
-            return res.send(prod)
-        }
-    
-})
-
-router.delete('/productos/:id', async(req,res)=>{
-    const {id} = req.params
-
-    
-        const existe = await productos.getById(id)
-        
-        if (!existe){
-            return res.status(404).send({ message: 'Error el producto no existe' })
-        } else{
-            const prod = productos.deleteById(id)
-        res.send(prod)
-        }
-    
-    
-})
+router.delete('/:id', ProductosControllers.deleteProdController)
 
 
 export {router as ProductosRouter}

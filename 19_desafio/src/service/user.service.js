@@ -11,4 +11,6 @@ export const saveUser = async(body)=>{
 }
 
 
-
+export const findUser = async(body)=>{
+    return await UserManager.findOne(body)
+}

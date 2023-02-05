@@ -12,7 +12,7 @@ import {config} from './config/config.js'
 import parseArgs from 'minimist';
 import cluster from 'cluster'
 import os from 'os'
-import {logger, logArchivoError} from './logs/logger.js'
+import {logger, logArchivoError} from './config/logger.js'
 
 //Captura argumentos
 const optionsFork ={alias:{m:'mode'}, default:{mode:'FORK'}}
