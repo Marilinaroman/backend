@@ -24,16 +24,6 @@ logger.info('objArgu', MODO);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-//Conecto base de datis
-const mongoUrl = config.MONGO_AUTENTICATION
-
-mongoose.connect(mongoUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology:true
-}, (err)=>{
-    if(err) return logger.error(`hubo un error: ${err}`);
-    logger.info('conexion a base de datos exitosa');
-})
 
 
 // configuro archivos json

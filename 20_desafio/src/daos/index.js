@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import admin from "firebase-admin";
 import { options } from '../config/options.js';
 import { config } from '../config/config.js';
 let ContenedorDaoProductos
@@ -38,11 +37,7 @@ switch(databaseType){
         ContenedorDaoCarrito = new CarritoDaosMariaDb(options.mariaDb,'carrito')
         break;
 
-    case "firebase":
-        const {ProductosDaosFirebase} = await import('./productos/productosFirebase.js')
-        const {CarritoDaosFirebase} = await import('./carritos/carritoFirebase.js')
-        ContenedorDaoProductos = new ProductosDaosFirebase()
-        ContenedorDaoCarrito = new CarritoDaosFirebase()
+    
 }
 
 export {ContenedorDaoProductos, ContenedorDaoCarrito}

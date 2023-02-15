@@ -28,7 +28,7 @@ router.post('/login',passport.authenticate('loginStrategy',{
     failureMessage:true
 }),
 (req,res)=>{
-    res.redirect('./perfil')
+    res.send('ingreso')
 })
 
 
