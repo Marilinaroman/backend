@@ -1,17 +1,17 @@
-import {ProductosManager} from "../dbOperations/index.js"
+import {ContenedorDaoProductos} from "../daos/index.js"
 
 export const getProd = async()=>{
-    return await ProductosManager.getAll()
+    return await ContenedorDaoProductos.getAll()
 }
 export const getProdById = async(id)=>{
-    return await ProductosManager.getById(id)
+    return await ContenedorDaoProductos.getById(id)
 }
 export const saveProd = async(body)=>{
-    return await ProductosManager.save(body)
+    return await ContenedorDaoProductos.save(body)
 }
 export const deleteProd = async(id)=>{
-    return await ProductosManager.deleteById(id)
+    return await ContenedorDaoProductos.deleteById(id)
 }
 export const updateProd = async(id, body)=>{
-    return await ProductosManager.putById(id, body)
+    return await ContenedorDaoProductos.putById(id, body)
 }

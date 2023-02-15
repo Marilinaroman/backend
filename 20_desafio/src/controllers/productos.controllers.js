@@ -11,7 +11,7 @@ export const getProdsControllers = async(req,res)=>{
 export const getProdByIdControllers = async(req,res)=>{
     const {id} = req.params
     try{
-        const response = await getProdById(Number(id))
+        const response = await getProdById(id)
         console.log(response);
         if(response){
             return res.send(response)
