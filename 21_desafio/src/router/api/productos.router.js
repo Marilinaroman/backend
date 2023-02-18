@@ -14,5 +14,6 @@ router.put('/:id', ProductosControllers.updateProdController)
 
 router.delete('/:id', ProductosControllers.deleteProdController)
 
+router.delete('/', ProductosControllers.deleteAllController)
 
 export {router as ProductosRouter}

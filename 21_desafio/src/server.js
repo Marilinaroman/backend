@@ -12,7 +12,9 @@ import {config} from './config/config.js'
 import parseArgs from 'minimist';
 import cluster from 'cluster'
 import os from 'os'
+import { options } from './config/options.js';
 import {logger, logArchivoError} from './config/logger.js'
+import cors from 'cors'
 
 //Captura argumentos
 const optionsFork ={alias:{m:'mode'}, default:{mode:'FORK'}}
@@ -61,7 +63,10 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
-
+app.use(cors({
+    origin:'http://localhost:3000',
+    methods:['GET','POST','PUT','DELETE']
+}))
 
 // defino rutas
 
@@ -82,10 +87,12 @@ if(MODO==='CLUSTER' && cluster.isPrimary){
 
 }else{
     //configuro el puerto
-    const PORT = process.env.PORT|| 8080
+    const PORT = options.server.PORT
 
     app.listen(PORT,()=>logger.info(`server ${PORT}`))
     
 }
+
+export{app}
 
 

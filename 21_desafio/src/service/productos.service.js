@@ -15,3 +15,7 @@ export const deleteProd = async(id)=>{
 export const updateProd = async(id, body)=>{
     return await ContenedorDaoProductos.putById(id, body)
 }
+
+export const deleteAll = async()=>{
+    return await ContenedorDaoProductos.deleteAll()
+}

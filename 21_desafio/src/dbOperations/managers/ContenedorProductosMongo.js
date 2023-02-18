@@ -47,6 +47,14 @@ class ContainerMongo {
             console.log(err);
         }
     }
+    async deleteAll(){
+        try {
+            await this.model.deleteMany({});
+            return {message:"delete successfully"}
+        } catch (error) {
+            return {message:`Error al borrar todo: ${error}`};
+        }
+    }
 }
 
 export {ContainerMongo}

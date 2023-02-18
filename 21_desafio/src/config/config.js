@@ -9,6 +9,7 @@ export const config = {
     FILE_DB: process.env.FILE_DB,
     MONGO_AUTENTICATION:process.env.MONGO_AUTENTICATION,
     MONGO_DB:process.env.MONGO_DB,
+    MONGO_TEST:process.env.MONGO_TEST,
     MONGO_SESSION:process.env.MONGO_SESSION,
     TEST_EMAIL: process.env.TEST_EMAIL,
     TEST_PASSWORD : process.env.TEST_PASSWORD,

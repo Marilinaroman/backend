@@ -9,7 +9,7 @@ let databaseType = 'mongo'
 switch(databaseType){
     case "mongo":
 
-        const URL = config.MONGO_DB
+        const URL = options.mongo.url
         
         mongoose.connect(URL, {
             useNewUrlParser: true,
