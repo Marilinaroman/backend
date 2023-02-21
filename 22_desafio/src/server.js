@@ -15,6 +15,7 @@ import os from 'os'
 import { options } from './config/options.js';
 import {logger, logArchivoError} from './config/logger.js'
 import cors from 'cors'
+import { ContenedorDaoUser } from './daos/index.js';
 
 //Captura argumentos
 const optionsFork ={alias:{m:'mode'}, default:{mode:'FORK'}}
@@ -92,7 +93,6 @@ if(MODO==='CLUSTER' && cluster.isPrimary){
     app.listen(PORT,()=>logger.info(`server ${PORT}`))
     
 }
-
 
 
 export{app}

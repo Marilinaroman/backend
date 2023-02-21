@@ -1,7 +1,9 @@
+import mongoose, {  mongo } from 'mongoose'
+
 class MongoContainer{
-    constructor(model){
-        this.model = model;
-    }
+        constructor(dataCollection, dataSchema){
+            this.model = mongoose.model(dataCollection, dataSchema)
+        }
 
     async getById(id){
         try {
@@ -9,7 +11,7 @@ class MongoContainer{
             if(!object){
                 return {message:`Error al buscar: no se encontró el id ${id}`, error:true};
             } else {
-                return {message: object, error:false};
+                return object;
             }
         } catch (error) {
             return {message:`Hubo un error ${error}`, error:true};
@@ -19,17 +21,16 @@ class MongoContainer{
     async getAll(){
         try {
             const objects = await this.model.find();
-            const data = JSON.parse(JSON.stringify(objects));
-            return data
+            return objects
         } catch (error) {
-            return [];
+            return console.log(error);;
         }
     }
 
     async save(body){
         try {
             const object = await this.model.create(body);
-            return `new document saved with id: ${object._id}`
+            return object
         } catch (error) {
             return {message:`Error al guardar: ${error}`};
         }

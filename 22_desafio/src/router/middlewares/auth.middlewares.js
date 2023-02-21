@@ -1,9 +1,11 @@
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import bcrypt from 'bcrypt'
-import { UserModel } from '../../daos/index.js'
+import { userSchema, usersCollection } from '../../dbOperations/model/users.js'
+import {mongoose} from 'mongoose'
 import {logger} from '../../config/logger.js'
 
+const UserModel = mongoose.model(usersCollection,userSchema)
 //serializar
 passport.serializeUser((user,done)=>{
     done(null, user.id)

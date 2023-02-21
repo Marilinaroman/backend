@@ -1,8 +1,8 @@
 import {MongoContainer} from '../../dbOperations/managers/mongo.manager.js'
 
 class UserMongoDao extends MongoContainer{
-    constructor(model){
-        super(model)
+    constructor(collection,schema){
+        super(collection,schema)
     }
 }
 

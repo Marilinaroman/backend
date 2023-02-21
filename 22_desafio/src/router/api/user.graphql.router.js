@@ -4,5 +4,7 @@ import {userGraphqlController} from '../../controllers/user.graphql.controllers.
 const router = express.Router()
 
 router.get('/', userGraphqlController())
+router.post('/', userGraphqlController())
+router.delete('/', userGraphqlController())
 
 export {router as graphiqlRouter}

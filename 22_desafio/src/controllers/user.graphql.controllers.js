@@ -4,9 +4,8 @@ import {root} from '../service/user.graphql.service.js'
 
 // configuracion graphql
 const graphqlSchema = buildSchema(`
-        type user{
+        type User{
             _id:String,
-            name:String,
             username:String,
             password:String
         }
@@ -15,12 +14,12 @@ const graphqlSchema = buildSchema(`
             password:String
         }
         type Query{
-            getUsers: [user],
-            getUserById(id:Int): user
+            getUsers: [User],
+            getUserById(id:String): User
         }
         type Mutation{
-            addUser(user:UserInput): user,
-            deleteUserById(_id:String): String
+            addUser(user:UserInput): User,
+            deleteUserById(id:String): String
         }
 `);
 

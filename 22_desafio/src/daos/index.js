@@ -5,7 +5,6 @@ import { config } from '../config/config.js';
 let ContenedorDaoProductos
 let ContenedorDaoCarrito
 let ContenedorDaoUser
-let UserModel
 
 let databaseType = 'mongo'
 
@@ -36,7 +35,6 @@ switch(databaseType){
         const {userSchema} = await import('../dbOperations/model/users.js')
         const {usersCollection} = await import('../dbOperations/model/users.js')
         ContenedorDaoUser = new UserMongoDao(usersCollection,userSchema)
-        UserModel = mongoose.model(usersCollection,userSchema)
         break;
 
     case "mariaDb":
@@ -49,4 +47,4 @@ switch(databaseType){
     
 }
 
-export {ContenedorDaoProductos, ContenedorDaoCarrito, ContenedorDaoUser, UserModel}
+export {ContenedorDaoProductos, ContenedorDaoCarrito, ContenedorDaoUser}
