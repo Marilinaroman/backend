@@ -1,9 +1,8 @@
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import bcrypt from 'bcrypt'
-import { UserModel } from '../../dbOperations/model/users.js'
+import { UserModel } from '../../daos/index.js'
 import {logger} from '../../config/logger.js'
-
 
 //serializar
 passport.serializeUser((user,done)=>{

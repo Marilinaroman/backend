@@ -1,8 +1,11 @@
 import mongoose from 'mongoose';
 import { options } from '../config/options.js';
 import { config } from '../config/config.js';
+
 let ContenedorDaoProductos
 let ContenedorDaoCarrito
+let ContenedorDaoUser
+let UserModel
 
 let databaseType = 'mongo'
 
@@ -28,6 +31,12 @@ switch(databaseType){
         const {carritosSchema} = await import('../dbOperations/model/mongoAtlas.js')
         const {carritosCollection} = await import('../dbOperations/model/mongoAtlas.js')
         ContenedorDaoCarrito = new CarritoDaosMongo(carritosCollection,carritosSchema)
+
+        const{UserMongoDao} = await import('./users/usersMongo.js')
+        const {userSchema} = await import('../dbOperations/model/users.js')
+        const {usersCollection} = await import('../dbOperations/model/users.js')
+        ContenedorDaoUser = new UserMongoDao(usersCollection,userSchema)
+        UserModel = mongoose.model(usersCollection,userSchema)
         break;
 
     case "mariaDb":
@@ -40,4 +49,4 @@ switch(databaseType){
     
 }
 
-export {ContenedorDaoProductos, ContenedorDaoCarrito}
+export {ContenedorDaoProductos, ContenedorDaoCarrito, ContenedorDaoUser, UserModel}

@@ -19,7 +19,8 @@ class MongoContainer{
     async getAll(){
         try {
             const objects = await this.model.find();
-            return objects;
+            const data = JSON.parse(JSON.stringify(objects));
+            return data
         } catch (error) {
             return [];
         }

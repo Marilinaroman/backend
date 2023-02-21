@@ -10,7 +10,7 @@ const objArgs = ParsedArgs(process.argv.slice(2),{
     default:{
         port: 8080,
         mode: 'FORK',
-        env: 'TEST'
+        env: 'DEV'
     }
 });
 
